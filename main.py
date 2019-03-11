@@ -29,8 +29,10 @@ def main():
             opts, dummy = getopt.getopt(sys.argv[1:], "e:d:i:h", ["encrypt", "decrypt", "info", "help"])
             for opt, arg in opts:
                 if opt in ("-e", "--encrypt"):
+                    print("Info@main: Encrypting folder.")
                     subprocess.run(["umount", config[arg]["plain"]])
                 elif opt in ("-d", "--decrypt"):
+                    print("Info@main: Decrypting folder.")
                     subprocess.run(["gocryptfs", config[arg]["cipher"], config[arg]["plain"]])
                 elif opt in ("-i", "--info"):
                     mount = subprocess.check_output(["mount"])
@@ -43,8 +45,6 @@ def main():
                     pass
     except KeyError as e:
         print("Error@main: '" + e.args[0] + "' is not an encrypted folder!")
-
-
 
 if __name__ == "__main__":
     main()
