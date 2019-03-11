@@ -19,10 +19,10 @@ def main():
         path = config[sys.argv[1]]["plain"].encode()
         arg = sys.argv[1]
         if path in mount:
-            print("Info@main: Encrypting file.")
+            print("Info@main: Encrypting folder.")
             subprocess.run(["umount", config[arg]["plain"]])
         else:
-            print("Info@main: Decrypting file.")
+            print("Info@main: Decrypting folder.")
             subprocess.run(["gocryptfs", config[arg]["cipher"], config[arg]["plain"]])
     else:
         opts, dummy = getopt.getopt(sys.argv[1:], "e:d:i:h", ["encrypt", "decrypt", "help"])
