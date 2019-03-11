@@ -25,12 +25,19 @@ def main():
             print("Info@main: Decrypting file.")
             subprocess.run(["gocryptfs", config[arg]["cipher"], config[arg]["plain"]])
     else:
-        opts, dummy = getopt.getopt(sys.argv[1:], "e:d:h", ["encrypt", "decrypt", "help"])
+        opts, dummy = getopt.getopt(sys.argv[1:], "e:d:i:h", ["encrypt", "decrypt", "help"])
         for opt, arg in opts:
             if opt in ("-e", "--encrypt"):
                 subprocess.run(["umount", config[arg]["plain"]])
             elif opt in ("-d", "--decrypt"):
                 subprocess.run(["gocryptfs", config[arg]["cipher"], config[arg]["plain"]])
+            elif opt in ("-i", "--info"):
+                mount = subprocess.check_output(["mount"])
+                path = config[sys.argv[2]]["plain"].encode()
+                if path in mount:
+                    print("Info@main: '" + arg + "' is mounted.")
+                else:
+                    print("Info@main: '" + arg + "' is not mounted.")
             elif opt in ("-h", "--help"):
                 pass
 
