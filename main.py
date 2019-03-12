@@ -9,7 +9,7 @@ import subprocess
 import sys
 import toml
 
-# Set the path to the TOML configuration file
+# Set the path to the configuration file
 CONFIG_PATH = "/Users/cfanatic/Coding/Python/GoCrypt/misc/config.toml"
 
 
@@ -20,16 +20,16 @@ def decrypt(config, key):
     subprocess.run(["gocryptfs", path_cipher, path_plain])
 
 def encrypt(config, key):
-    # Encrypt folder by calling unmount process
+    # Call unmount process
     path_plain = config[key]["plain"]
     subprocess.run(["umount", path_plain])
 
 def mount():
-    # Get all folders which are currently mounted
+    # Get all mounted or decrypted folder paths
     return subprocess.check_output(["mount"])
 
 def auto(config, key):
-    # Automatically encrypt or decrypt folder
+    # Encrypt or decrypt folder automatically
     path = config[key]["plain"].encode()
     if path in mount():
         encrypt(config, key)
@@ -37,7 +37,7 @@ def auto(config, key):
         decrypt(config, key)
 
 def summary(config):
-    # Print summary of all folders
+    # Print complete summary
     index = 0
     print("{0:<8} {1:<14} {2:<10} {3:<26}".format("Index", "Key", "Mount", "Path"))
     print("----------------------------------------------------------------")
