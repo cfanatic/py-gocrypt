@@ -17,7 +17,7 @@ def main():
         if len(sys.argv) == 1:
             print("Error@main: Not enough input arguments given!")
         else:
-            opts, dummy = getopt.getopt(sys.argv[1:], "e:d:i:p", ["encrypt", "decrypt", "info", "print"])
+            opts, dummy = getopt.getopt(sys.argv[1:], "e:d:p", ["encrypt", "decrypt", "print"])
             for opt, arg in opts:
                 if opt in ("-e", "--encrypt"):
                     print("Info@main: Encrypting folder.")
@@ -25,20 +25,16 @@ def main():
                 elif opt in ("-d", "--decrypt"):
                     print("Info@main: Decrypting folder.")
                     subprocess.run(["gocryptfs", config[arg]["cipher"], config[arg]["plain"]])
-                elif opt in ("-i", "--info"):
-                    mount = subprocess.check_output(["mount"])
-                    path = config[arg]["plain"].encode()
-                    if path in mount:
-                        print("Info@main: '" + arg + "' is mounted.")
-                    else:
-                        print("Info@main: '" + arg + "' is not mounted.")
                 elif opt in ("-p", "--print"):
                     index = 0
-                    print("{0:<8} {1:<14} {2:<8}".format("Idx", "Key", "Path"))
+                    print("{0:<8} {1:<14} {2:<10} {3:<26}".format("Index", "Key", "Mount", "Path"))
                     print("----------------------------------------------------------------")
                     for key, value in config.items():
                         index += 1
-                        print("{0:<8} {1:<14} {2:<8}".format(index, key, value["plain"]))
+                        mount = subprocess.check_output(["mount"])
+                        path = config[key]["plain"].encode()
+                        active = "on" if path in mount else "off"
+                        print("{0:<8} {1:<14} {2:<10} {3:<26}".format(index, key, active, value["plain"]))
                 else:
                     mount = subprocess.check_output(["mount"])
                     path = config[sys.argv[1]]["plain"].encode()
