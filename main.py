@@ -51,7 +51,7 @@ def main():
     config = toml.load(CONFIG_PATH)
     try:
         if len(sys.argv) == 1:
-            print("Error@main: Not enough input arguments given!")
+            summary(config)
         else:
             opts, args = getopt.getopt(sys.argv[1:], "d:e:s", ["decrypt", "encrypt", "summary"])
             for opt, key in opts:
