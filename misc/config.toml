@@ -1,9 +1,9 @@
 # Configuration file for gocryptfs 
 
 [photos]
-cipher = "/Users/cfanatic/photos"
-plain = "/Users/cfanatic/.photos"
+cipher = "/Users/cfanatic/.photos"
+plain = "/Users/cfanatic/photos"
 
 [notes]
-cipher = "/Users/cfanatic/notes"
-plain = "/Users/cfanatic/.notes"
+cipher = "/Users/cfanatic/.notes"
+plain = "/Users/cfanatic/notes"
