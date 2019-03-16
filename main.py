@@ -5,12 +5,13 @@ Call gocryptfs from terminal with command line arguments
 """
 
 import getopt
+import os
 import subprocess
 import sys
 import toml
 
 # Set the path to the configuration file
-CONFIG_PATH = "/Users/cfanatic/Coding/Python/GoCrypt/misc/config.toml"
+CONFIG_PATH = os.path.join(os.getcwd(), "misc/config.toml")
 
 
 def decrypt(config, key):
