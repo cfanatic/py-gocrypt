@@ -32,4 +32,4 @@ In order to decrypt a folder, run `gc <keyword>`:
 
 Run the same command in order to encrypt a folder.
 
-Each keyword to a encrypted folder is defined in `misc/config.toml`.
+Each keyword to an encrypted folder is defined in `misc/config.toml`.
