@@ -11,7 +11,7 @@ import sys
 import toml
 
 # Set the path to the configuration file
-CONFIG_PATH = os.path.join(os.getcwd(), "misc/config.toml")
+CONFIG_PATH = ""
 
 
 def decrypt(config, key):
@@ -49,8 +49,11 @@ def summary(config):
         print("{0:<8} {1:<14} {2:<10} {3:<26}".format(index, key, active, value["plain"]))
 
 def main():
-    config = toml.load(CONFIG_PATH)
     try:
+        if not CONFIG_PATH:
+            raise ValueError("No path to configuration file set")
+        else:
+            config = toml.load(CONFIG_PATH)
         if len(sys.argv) == 1:
             summary(config)
         else:
@@ -66,6 +69,8 @@ def main():
                 auto(config, key)
     except KeyError as e:
         print("Error@main: '" + e.args[0] + "' is not an encrypted folder!")
+    except ValueError as e:
+        print("Error@main: " + e.args[0] + "!")
     except getopt.GetoptError as e:
         print("Error@main: " + e.args[0] +"!")
 
