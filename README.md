@@ -30,8 +30,6 @@ In order to decrypt a folder, run `gc <keyword>`:
 
 ![Decrypt](https://github.com/cfanatic/py-gocrypt/blob/master/misc/gc_decrypt.png)
 
-Same command is called to encrypt a folder:
+Run the same command in order to encrypt a folder.
 
-![Decrypt](https://github.com/cfanatic/py-gocrypt/blob/master/misc/gc_encrypt.png)
-
-The keyword of the encrypted folder is defined in `misc/config.toml`.
+Each keyword to a encrypted folder is defined in `misc/config.toml`.
